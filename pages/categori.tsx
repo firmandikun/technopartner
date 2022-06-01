@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout'
 
@@ -8,9 +9,9 @@ const Categori = () => {
 
     const [category, setCategory] = useState([])
     const [menu, setMenu] = useState([])
-
+    const router = useRouter();
+    const token = Cookies.get("token");
     const fetchData = async () => {
-        const token = Cookies.get("token");
 
 
         var bodyFormData = new FormData();
@@ -35,6 +36,9 @@ const Categori = () => {
     }
 
     useEffect(() => {
+        if(!token) {
+            router.push('/user/login');
+          }
         fetchData()
     }, [])
     

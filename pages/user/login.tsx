@@ -13,11 +13,11 @@ const login = () => {
     const router = useRouter();
 
 
-    useEffect(() => {
-        if(localStorage.getItem('token')) {
-            router.push('/user/login');
-        }
-    }, []);
+    // useEffect(() => {
+    //     if(localStorage.getItem('token')) {
+    //         router.push('/user/login');
+    //     }
+    // }, []);
 
 
 
@@ -34,10 +34,10 @@ const login = () => {
         await axios.post("https://soal.staging.id/oauth/token" , bodyFormData )
         .then((response) => {
 
-            //set token on localStorage
-            // localStorage.setItem('token', response.data.access_token);
+           
+            
             const  token  = response.data.access_token;
-            // const tokenBase64 = window.btoa(token);
+            
             Cookies.set('token', token , { expires: 7 })
             console.log(response.data.access_token);
  
